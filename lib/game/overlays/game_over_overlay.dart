@@ -18,7 +18,7 @@ class GameOverOverlay extends StatelessWidget {
     final hasBag = game.gameManager.collectedBag;
     final hasChest = game.gameManager.openedChest;
     return Material(
-      color: Colors.black.withOpacity(0.57),
+      color: Colors.black.withValues(alpha: 0.57),
       child: Center(
         child: SizedBox(
           width: 328.w,
@@ -63,7 +63,7 @@ class GameOverOverlay extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          if (hasChest) ...[
+                          if (hasChest && won) ...[
                             Container(
                               width: 74.w,
                               height: 78.h,
@@ -78,14 +78,14 @@ class GameOverOverlay extends StatelessWidget {
                                     offset: const Offset(0, 4),
                                     blurRadius: 4,
                                     color: const Color(0xFFFAFF00)
-                                        .withOpacity(0.36),
+                                        .withValues(alpha: 0.36),
                                   ),
                                 ],
                               ),
                             ),
                             Gap(49.w),
                           ],
-                          if (hasBag)
+                          if (hasBag && won)
                             Container(
                               width: 62.w,
                               height: 70.h,
@@ -100,14 +100,46 @@ class GameOverOverlay extends StatelessWidget {
                                     offset: const Offset(0, 4),
                                     blurRadius: 4,
                                     color: const Color(0xFFFAFF00)
-                                        .withOpacity(0.36),
+                                        .withValues(alpha: 0.36),
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                         ],
                       ),
                     ),
+                    if (!won) ...[
+                      GestureDetector(
+                        onTap: game.watchAd,
+                        child: SizedBox(
+                          width: 137.w,
+                          height: 40.h,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Positioned(
+                                top: 0,
+                                child: Image.asset(
+                                  'assets/images/watch_ad.png',
+                                  width: 113.w,
+                                  height: 34.h,
+                                ),
+                              ),
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: Image.asset(
+                                  'assets/images/camera.png',
+                                  width: 25.w,
+                                  height: 23.h,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 23.h),
+                    ],
                     SizedBox(
                       width: 232.w,
                       child: Row(

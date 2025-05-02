@@ -22,8 +22,13 @@ class GameManager extends Component with HasGameRef<MyGame> {
 
   bool gameOver = false;
   bool won = true;
+  bool _hasExtraGame = true;
 
-  ValueNotifier<int> seconds = ValueNotifier(180);
+  bool get hasExtraGame => _hasExtraGame;
+
+  static const int _time = 180;
+
+  ValueNotifier<int> seconds = ValueNotifier(_time);
   ValueNotifier<int> jumps = ValueNotifier(5);
 
   ValueNotifier<Map<String, int>> potions = ValueNotifier({});
@@ -111,8 +116,16 @@ class GameManager extends Component with HasGameRef<MyGame> {
         seconds.value--;
 
         if (seconds.value <= 0) {
-          won = false;
           timerComponent.removeFromParent();
+          won = false;
+
+          if (_hasExtraGame) {
+            gameOver = true;
+            _hasExtraGame = false;
+            gameRef.goToExtraGame();
+            return;
+          }
+
           gameRef.gameOver(false);
           _coins = 0;
         }
@@ -186,11 +199,19 @@ class GameManager extends Component with HasGameRef<MyGame> {
   }
 
   void init() async {
-    seconds.value = 180;
+    _hasExtraGame = true;
+    seconds.value = _time;
     jumps.value = 5;
     ancientTime.value = true;
     potions.value = configProvider.potions;
     if (children.contains(timerComponent)) timerComponent.removeFromParent();
     add(timerComponent);
+  }
+
+  void addTime(int minutes) {
+    gameOver = false;
+    won = true;
+    seconds.value += minutes * 60;
+    resume();
   }
 }

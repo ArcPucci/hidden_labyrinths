@@ -30,6 +30,7 @@ class _MainGameScreenState extends State<MainGameScreen> {
           "prizeOverlay": (context, MyGame game) => PrizeOverlay(game),
           "chestPrizesOverlay": (context, MyGame game) => ChestPrizesOverlay(game),
           "gameOverOverlay": (context, MyGame game) => GameOverOverlay(game),
+          "extraGameOverlay": (context, MyGame game) => ExtraGameOverlay(game),
         },
       ),
     );

@@ -19,7 +19,7 @@ class DialogBg extends StatelessWidget {
     return Container(
       width: width ?? 207.w,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.8),
+        color: Colors.black.withValues(alpha: 0.8),
         border: Border.all(width: 8.sp, color: AppColors.yellow),
       ),
       padding: padding ??

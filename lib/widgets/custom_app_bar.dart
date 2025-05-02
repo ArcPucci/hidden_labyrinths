@@ -4,7 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:hidden_labyrinths/widgets/widgets.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, this.canTapSettings = true});
+
+  final bool? canTapSettings;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CustomAppBar extends StatelessWidget {
   }
 
   void showSettings(BuildContext context) {
+    if (!(canTapSettings ?? true)) return;
     showDialog(
       context: context,
       builder: (context) {

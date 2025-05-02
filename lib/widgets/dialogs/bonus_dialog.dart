@@ -48,19 +48,22 @@ class BonusDialog extends StatelessWidget {
             ),
           ),
           Positioned(
+            top: 83.h,
             left: 0,
             right: 0,
-            bottom: 29.h,
             child: Center(
               child: Stack(
                 children: [
-                  Image.asset(
-                    'assets/png/light.png',
-                    width: 155.w,
-                    height: 155.h,
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 50.h),
+                    child: Image.asset(
+                      'assets/png/light.png',
+                      width: 155.w,
+                      height: 155.h,
+                    ),
                   ),
                   Positioned(
-                    bottom: 11.h,
+                    top: 122.h,
                     left: 0,
                     right: 0,
                     child: Center(
@@ -72,8 +75,10 @@ class BonusDialog extends StatelessWidget {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 6.w, vertical: 5.h),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 6.w,
+                          vertical: 5.h,
+                        ),
                         child: Text(shopItem.name, style: AppStyles.ts12),
                       ),
                     ),

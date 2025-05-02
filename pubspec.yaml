@@ -45,6 +45,8 @@ dependencies:
   just_audio: ^0.9.42
   device_info_plus: ^11.2.0
   flame_forge2d: ^0.18.2+3
+  flutter_svg: ^2.1.0
+  path_drawing: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,7 @@ flutter:
   assets:
     - assets/png/
     - assets/png/texts/
+    - assets/png/bonus/
     - assets/png/icons/
     - assets/png/scale/
     - assets/png/leaves/

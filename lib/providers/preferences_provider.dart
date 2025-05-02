@@ -16,6 +16,7 @@ class PreferencesProvider {
   static const potionsKey = "POTIONS";
   static const levelKey = "LEVEL";
   static const lastActiveKet = "LAST_ACTIVE";
+  static const lastBonusGameDateKey = "LAST_BONUS_GAME_DATE";
 
   Future<void> setSound(int level) async {
     await _preferences.setInt(soundKey, level);
@@ -54,7 +55,7 @@ class PreferencesProvider {
   }
 
   int getCoins() {
-    return _preferences.getInt(coinsKey) ?? 0;
+    return _preferences.getInt(coinsKey) ?? 500;
   }
 
   Future<void> setPotions(Map<String, int> potions) async {
@@ -110,5 +111,22 @@ class PreferencesProvider {
     );
 
     return date;
+  }
+
+  Future<void> setLastBonusGameDate() async {
+    final date = DateTime.now().withZeroTime;
+    final temp = date.microsecondsSinceEpoch;
+    await _preferences.setInt(lastBonusGameDateKey, temp);
+  }
+
+  Future<bool> getLastBonusGame() async {
+    final temp = _preferences.getInt(lastBonusGameDateKey) ?? 0;
+    DateTime? date;
+
+    if (temp != 0) date = DateTime.fromMicrosecondsSinceEpoch(temp);
+    final currentDate = DateTime.now().withZeroTime;
+
+    final hasReward = date != currentDate;
+    return hasReward;
   }
 }

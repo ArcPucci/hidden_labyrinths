@@ -230,6 +230,11 @@ class ConfigProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addPotion(ShopItem item) async {
+    _potions[item.name] = _potions[item.name]! + 1;
+    await _preferencesProvider.setPotions(_potions);
+  }
+
   void nextLevel() async {
     if (_level == _selectedLevel) {
       if (_level >= 5) return;

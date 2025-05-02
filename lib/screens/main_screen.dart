@@ -17,16 +17,23 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  late final ConfigProvider provider;
+  late final PreferencesProvider preferences;
+
   @override
   void initState() {
     super.initState();
 
-    final provider = Provider.of<ConfigProvider>(context, listen: false);
+    provider = Provider.of<ConfigProvider>(context, listen: false);
+    preferences = Provider.of<PreferencesProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback(
-      (time) {
+      (time) async {
         if (provider.hasBonus && !provider.mainTutor) {
-          showBonus(provider.bonus);
+          await showBonus(provider.bonus);
           provider.collectedBonus();
+          if (await preferences.getLastBonusGame()) showBonusGame();
+        } else {
+          if (await preferences.getLastBonusGame()) showBonusGame();
         }
       },
     );
@@ -115,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
                     child: MainOnboarding(
                       onCompleted: () {
                         value.completeMainTutor();
-                        if(value.hasBonus) {
+                        if (value.hasBonus) {
                           showBonus(value.bonus);
                           value.collectedBonus();
                         }
@@ -142,11 +149,35 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  void showBonus(ShopItem item) {
-    showDialog(
+  Future<void> showBonus(ShopItem item) async {
+    await showDialog(
       context: context,
       builder: (context) {
         return Center(child: BonusDialog(shopItem: item));
+      },
+    );
+  }
+
+  void showBonusGame() {
+    preferences.setLastBonusGameDate();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Center(child: EnterBonusGame(onCompleted: showBonusGameReward));
+      },
+    );
+  }
+
+  void showBonusGameReward(ShopItem? item, int? golds) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return BonusGameRewardDialog(
+          shopItem: item,
+          golds: golds,
+        );
       },
     );
   }

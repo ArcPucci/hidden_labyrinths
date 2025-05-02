@@ -113,6 +113,24 @@ class MyGame extends Forge2DGame with HasCollisionDetection {
     overlays.add('gameOverOverlay');
   }
 
+  void watchAd() {
+    overlays.remove('gameOverOverlay');
+    gameManager.addTime(3);
+  }
+
+  void goToExtraGame() {
+    overlays.add('extraGameOverlay');
+  }
+
+  void closeExtraGameOverlay(int minutes) {
+    overlays.remove('extraGameOverlay');
+    if (minutes == 0) {
+      gameOver(false);
+      return;
+    }
+    gameManager.addTime(minutes);
+  }
+
   void showPrize() {
     overlays.add('prizeOverlay');
   }

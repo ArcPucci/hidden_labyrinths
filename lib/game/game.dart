@@ -13,6 +13,7 @@ export 'components/collected_item_overlay.dart';
 export 'components/game_bg.dart';
 export 'components/game_bg_frame.dart';
 export 'overlays/game_overlay.dart';
+export 'overlays/extra_game_overlay.dart';
 export 'overlays/game_over_overlay.dart';
 export 'overlays/prize_overlay.dart';
 export 'overlays/chest_prizes_overlay.dart';

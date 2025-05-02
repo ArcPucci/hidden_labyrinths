@@ -69,6 +69,7 @@ class Player extends SpriteAnimationGroupComponent
   @override
   void update(double dt) {
     super.update(dt);
+    if(gameRef.gameManager.gameOver) return;
     if (joystick.isDragged && joystick.direction != JoystickDirection.idle) {
       current = PlayerState.running;
       angle = joystick.delta.screenAngle() - pi;
