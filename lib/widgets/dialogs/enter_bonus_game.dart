@@ -238,7 +238,7 @@ class _EnterBonusGameState extends State<EnterBonusGame> {
                     child: GestureDetector(
                       onTap: () {
                         Navigator.of(context).pop();
-                        widget.onCompleted(shopItem, golds);
+                        if (completed) widget.onCompleted(shopItem, golds);
                       },
                       child: Image.asset(
                         'assets/png/icons/close.png',

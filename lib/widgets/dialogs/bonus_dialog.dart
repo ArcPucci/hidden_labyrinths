@@ -13,6 +13,7 @@ class BonusDialog extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: Stack(
+        alignment: Alignment.center,
         children: [
           Image.asset(
             'assets/png/stone_bg.png',
@@ -49,54 +50,50 @@ class BonusDialog extends StatelessWidget {
           ),
           Positioned(
             top: 83.h,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 50.h),
+            width: 390.w,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 50.h),
+                  child: Image.asset(
+                    'assets/png/light.png',
+                    width: 155.w,
+                    height: 155.h,
+                  ),
+                ),
+                Positioned(
+                  top: 122.h,
+                  child: Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        image: const DecorationImage(
+                          image: AssetImage('assets/png/rect/rect1.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 6.w,
+                        vertical: 5.h,
+                      ),
+                      child: Text(shopItem.name, style: AppStyles.ts12),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 26.h,
+                  left: 0,
+                  right: 0,
+                  child: Center(
                     child: Image.asset(
-                      'assets/png/light.png',
-                      width: 155.w,
-                      height: 155.h,
+                      shopItem.image,
+                      width: 48.w,
+                      height: 83.h,
                     ),
                   ),
-                  Positioned(
-                    top: 122.h,
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/png/rect/rect1.png'),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 6.w,
-                          vertical: 5.h,
-                        ),
-                        child: Text(shopItem.name, style: AppStyles.ts12),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 26.h,
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Image.asset(
-                        shopItem.image,
-                        width: 48.w,
-                        height: 83.h,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

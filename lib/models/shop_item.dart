@@ -16,6 +16,27 @@ abstract class ShopItem {
     required this.height,
     required this.description,
   });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ShopItem &&
+          runtimeType == other.runtimeType &&
+          price == other.price &&
+          name == other.name &&
+          image == other.image &&
+          width == other.width &&
+          height == other.height &&
+          description == other.description;
+
+  @override
+  int get hashCode =>
+      price.hashCode ^
+      name.hashCode ^
+      image.hashCode ^
+      width.hashCode ^
+      height.hashCode ^
+      description.hashCode;
 }
 
 abstract class TransitionPotion extends ShopItem {

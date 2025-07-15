@@ -24,7 +24,16 @@ class CoinsWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextWidget(text: value.coins.toString(), height: 23.h),
+              Gap(13.w),
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: TextWidget(
+                    text: value.coins.toString(),
+                    height: 23.h,
+                  ),
+                ),
+              ),
               Gap(7.w),
               Image.asset(
                 'assets/png/icons/coin.png',

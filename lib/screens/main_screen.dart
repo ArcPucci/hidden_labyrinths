@@ -33,6 +33,7 @@ class _MainScreenState extends State<MainScreen> {
           provider.collectedBonus();
           if (await preferences.getLastBonusGame()) showBonusGame();
         } else {
+          if (provider.mainTutor) return;
           if (await preferences.getLastBonusGame()) showBonusGame();
         }
       },
@@ -120,11 +121,15 @@ class _MainScreenState extends State<MainScreen> {
                 if (value.mainTutor) {
                   return Positioned.fill(
                     child: MainOnboarding(
-                      onCompleted: () {
+                      onCompleted: () async {
                         value.completeMainTutor();
                         if (value.hasBonus) {
-                          showBonus(value.bonus);
+                          await showBonus(value.bonus);
                           value.collectedBonus();
+                        }
+
+                        if (await preferences.getLastBonusGame()) {
+                          showBonusGame();
                         }
                       },
                     ),

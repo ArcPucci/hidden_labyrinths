@@ -109,6 +109,7 @@ class GameManager extends Component with HasGameRef<MyGame> {
 
   @override
   FutureOr<void> onLoad() {
+    potions.value = configProvider.potions;
     timerComponent = TimerComponent(
       period: 1,
       repeat: true,
@@ -199,6 +200,7 @@ class GameManager extends Component with HasGameRef<MyGame> {
   }
 
   void init() async {
+    gameOver = false;
     _hasExtraGame = true;
     seconds.value = _time;
     jumps.value = 5;

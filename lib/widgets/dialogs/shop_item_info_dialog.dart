@@ -30,6 +30,7 @@ class _ShopItemInfoDialogState extends State<ShopItemInfoDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final recoveryPotion = widget.shopItem == RecoveryPotion();
     return GestureDetector(
       onTap: () => setState(() => _visible = false),
       child: Material(
@@ -157,7 +158,7 @@ class _ShopItemInfoDialogState extends State<ShopItemInfoDialog> {
               ],
             ),
             Positioned(
-              top: 31.h,
+              top: (recoveryPotion) ? 100.h : 31.h,
               left: 0,
               right: 0,
               child: Center(
